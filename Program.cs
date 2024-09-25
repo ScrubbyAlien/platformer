@@ -6,8 +6,8 @@ namespace platformer;
 
 static class Program
 {
-    private const int ScreenWidth = 800;
-    private const int ScreenHeight = 600;
+    public const int ScreenWidth = 800;
+    public const int ScreenHeight = 600;
     
     
     public static void Main(string[] args)
@@ -17,21 +17,8 @@ static class Program
 
         Clock clock = new();
         Scene scene = new();
-        Background background = new();
-        Hero hero = new();
-        hero.Position = new Vector2f(36, 288 - 9 - 12);
+        scene.Load("level0");
         
-        
-        scene.Spawn(background);
-        scene.Spawn(hero);
-        
-        for (int i = 0; i < 10; i++)
-        {
-            scene.Spawn(new Platform
-            {
-                Position = new Vector2f(18 + i * 18, 288)
-            });
-        }
         
         window.SetView(new View(new Vector2f(200, 150), new Vector2f(400, 300)));
 

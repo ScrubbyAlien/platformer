@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "03cca/tQCc+beJAm6pcW+39p6+tMBC74BY3ouuroKUv7kWxcAx9Sb4BWzdgBR3yH7ObI6r6Mt09pH7JgOWr0tA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\a24sames\\RiderProjects\\platformer\\platformer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\a24sames\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
+    "C:\\Users\\a24sames\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
+    "C:\\Users\\a24sames\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
+    "C:\\Users\\a24sames\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
+    "C:\\Users\\a24sames\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
+    "C:\\Users\\a24sames\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
