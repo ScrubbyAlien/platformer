@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Text;
 using Platformer;
 using SFML.Graphics;
 using SFML.System;
@@ -40,6 +37,13 @@ public class Scene
                 entity.Position += hit.Normal * hit.Overlap;
                 i--;
                 collided = true;
+                 
+                // break breakable platforms if hit from below
+                if (entity is Hero { VerticalSpeed: <= 0 } &&
+                    other is Platform { Breakable: true } platform &&
+                    hit.Normal.Y > 0)
+                    platform.Dead = true;
+                    
             }
 
         }
@@ -70,7 +74,6 @@ public class Scene
         Spawn(new Background());
 
         string file = $"assets/{nextScene}.txt";
-        Console.WriteLine($"Loading scene '{file}'");
 
         foreach (string line in File.ReadLines(file, Encoding.UTF8))
         {
@@ -90,7 +93,11 @@ public class Scene
             switch (type)
             {
                 case "w":
-                    Spawn(new Platform { Position = new Vector2f(x, y) });
+                    Spawn(new Platform
+                    {
+                        Position = new Vector2f(x, y),
+                        Breakable = words[3] != "F"
+                    });
                     break;
                 case "d":
                     Spawn(new Door
@@ -106,7 +113,6 @@ public class Scene
                     Spawn(new Hero { Position = new Vector2f(x, y) });
                     break;
             }
-            Console.WriteLine($"Loaded {type} at {x}, {y}");
         }
         
         currentScene = nextScene;
@@ -147,5 +153,20 @@ public class Scene
         {
             entity.Render(target);
         }
+    }
+
+    public bool FindByType<T>(out T found) where T : Entity
+    {
+        foreach (Entity entity in entities)
+        {
+            if (!entity.Dead && entity is T typed)
+            {
+                found = typed;
+                return true;
+            }
+        }
+
+        found = default!;
+        return false;
     }
 }

@@ -11,8 +11,8 @@ public class Background : Entity
     
     public Background() : base("background")
     {
-        _sprite.TextureRect = new IntRect(0, 0, (int) WIDTH, (int) HEIGHT);
-        _sprite.Origin = new Vector2f(WIDTH / 2, HEIGHT / 2);
+        sprite.TextureRect = new IntRect(0, 0, (int) WIDTH, (int) HEIGHT);
+        sprite.Origin = new Vector2f(WIDTH / 2, HEIGHT / 2);
     }
 
     public override void Render(RenderTarget target)
@@ -27,16 +27,16 @@ public class Background : Entity
         {
             for (int col = 0; col <= tilesX; col++)
             {
-                _sprite.TextureRect = row switch
+                sprite.TextureRect = row switch
                 {
                     < 5 => new IntRect(0, 0, (int)WIDTH, (int)HEIGHT),
                     5 => new IntRect(24, 0, (int)WIDTH, (int)HEIGHT),
                     > 5 => new IntRect(48, 0, (int)WIDTH, (int)HEIGHT)
                 };
 
-                _sprite.Origin = new Vector2f();
-                _sprite.Position = topLeft + 24 * new Vector2f(col, row);
-                target.Draw(_sprite);
+                sprite.Origin = new Vector2f();
+                sprite.Position = topLeft + 24 * new Vector2f(col, row);
+                target.Draw(sprite);
             }
         }
     }

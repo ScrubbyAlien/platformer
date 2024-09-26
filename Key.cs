@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using Platformer;
+using SFML.Graphics;
 using SFML.System;
 
 namespace platformer;
@@ -7,7 +8,24 @@ public class Key : Entity
 {
     public Key() : base("tileset")
     {
-        _sprite.TextureRect = new IntRect(126, 18, 18, 18);
-        _sprite.Origin = new Vector2f(9, 9);
+        sprite.TextureRect = new IntRect(126, 18, 18, 18);
+        sprite.Origin = new Vector2f(9, 9);
+    }
+
+    public override void Update(Scene scene, float deltaTime)
+    {
+        if (scene.FindByType(out Hero hero))
+        {
+            if (Collision.RectangleRectangle(Bounds, hero.Bounds, out _))
+            {
+                if (scene.FindByType(out Door door))
+                {
+                    door.Unlock();
+                }
+
+                Dead = true;
+            }
+            
+        }
     }
 }
