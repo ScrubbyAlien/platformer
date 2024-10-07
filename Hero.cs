@@ -53,7 +53,7 @@ public class Hero : Entity
         }
         else if (!isGrounded)
         {
-            sprite.TextureRect = WALKING;
+            sprite.TextureRect = WALKING; // in the air
         }
         else if (!walking && isGrounded)
         {
@@ -90,7 +90,7 @@ public class Hero : Entity
         else
         {
             // let the player choose how high to jump by holding up
-            if (isUpPressed && verticalSpeed < 0) verticalSpeed *= 0.05f;
+            if (isUpPressed && verticalSpeed < 0) verticalSpeed *= 0.2f;
 
             isUpPressed = false;
         }
@@ -101,24 +101,24 @@ public class Hero : Entity
         Vector2f velocity = new Vector2f(0, verticalSpeed * deltaTime);
         if (scene.TryMove(this, velocity))
         {
-            if (verticalSpeed > 0.0f)
-            {
+            
+            if (verticalSpeed > 0.0f)  
+            { // if we collided and vertical speed is greater than zero that means we just hit or are standing on the ground
                 isGrounded = true;
                 verticalSpeed = 0.0f;
             }
             else
-            {
+            { // when vertical speed is less than zero we bumped our head and drop down faster
                 verticalSpeed = -0.5f * verticalSpeed;
             }
-           
         }
-        // stabilize isGrounded when on the floor, 1f is just margin when standing still because of collision shenanigans
-        else if (verticalSpeed is > -float.Epsilon and < 1f ) 
+        // make sure isGrounded is true even when no collision occurred
+        // CORRECTION: thought this was needed but turns out it is not. isGrounded behaves just as expected without this clause
+        // will leave it as is though
+        else if (verticalSpeed == 0f) 
         {
             isGrounded = true;
         }
-        
-        
         
         if (Position.Y > Program.ScreenHeight + Bounds.Height / 2) scene.Reload();
         if (Position.X > Program.ScreenWidth + Bounds.Width / 2) scene.Reload();
