@@ -112,13 +112,6 @@ public class Hero : Entity
                 verticalSpeed = -0.5f * verticalSpeed;
             }
         }
-        // make sure isGrounded is true even when no collision occurred
-        // CORRECTION: thought this was needed but turns out it is not. isGrounded behaves just as expected without this clause
-        // will leave it as is though
-        else if (verticalSpeed == 0f) 
-        {
-            isGrounded = true;
-        }
         
         if (Position.Y > Program.ScreenHeight + Bounds.Height / 2) scene.Reload();
         if (Position.X > Program.ScreenWidth + Bounds.Width / 2) scene.Reload();
